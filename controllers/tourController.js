@@ -11,12 +11,20 @@ exports.getAllTours = async (req, res) => {
     //   .equals('easy');
 
     // Build the Query
+    // 1.) Filtering
     const queryObj = { ...req.query };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
 
+    // 2,) Adv Filtering
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+    // { difficulty: 'easy', duration: { $gte: 5 } }
+    // { difficulty: 'easy', duration: { gte: 5 } }
+
     excludedFields.forEach((el) => delete queryObj[el]);
 
-    const query = Tour.find(queryObj);
+    const query = Tour.find(JSON.parse(queryStr));
 
     // Execute Qery
     const tours = await query;
