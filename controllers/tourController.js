@@ -65,7 +65,7 @@ exports.createTour = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: 'fail',
-      message: 'Invalid Dataset',
+      message: err,
     });
   }
 };
@@ -115,7 +115,7 @@ exports.getTourStats = async (req, res) => {
       },
       {
         $group: {
-          _id: { $toupper: '$difficulty' },
+          _id: { $toUpper: '$difficulty' },
           numTours: { $sum: 1 },
           numRatings: { $sum: '$ratingsQunatity' },
           avgRating: { $avg: '$ratingAverage' },
@@ -174,7 +174,7 @@ exports.getMonthlyPlan = async (req, res) => {
       },
       {
         $project: {
-          _id: 0
+          _id: 0,
         },
       },
       {
