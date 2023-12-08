@@ -10,11 +10,21 @@ const {
   getMonthlyPlan,
 } = require('../controllers/tourController');
 const { protect, restrictTo } = require('../controllers/authController');
-const { createReview } = require('../controllers/reviewController');
+const reviewRouter = require('./reviewRoutes');
 
 const router = express.Router();
 
+// POST /tour/tourID/reviews
+// GET /tour/tourID/reviews
+// GET /tour/tourID/reviews/reviewID
+
+// router
+//   .route('/:tourId/reviews')
+//   .post(protect, restrictTo('user'), createReview);
+
 // router.param('id', checkID);
+
+router.use('/:tourId/reviews', reviewRouter);
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 
@@ -29,13 +39,5 @@ router
   .get(getTourById)
   .patch(updateTour)
   .delete(protect, restrictTo('admin', 'lead-guide'), deleteTour);
-
-// POST /tour/tourID/reviews
-// GET /tour/tourID/reviews
-// GET /tour/tourID/reviews/reviewID
-
-router
-  .route('/:tourId/reviews')
-  .post(protect, restrictTo('user'), createReview);
 
 module.exports = router;
