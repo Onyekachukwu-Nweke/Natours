@@ -117,6 +117,10 @@ const tourSchema = new mongoose.Schema(
   },
 );
 
+// Database indexes
+tourSchema.index({ price: 1, ratingsAverage: -1 });
+tourSchema.index({ slug: 1 });
+
 // eslint-disable-next-line prettier/prettier
 tourSchema.virtual('durationWeeks').get(function() {
   return this.duration / 7;
