@@ -25,7 +25,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set Security HTTP
-app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrc: ["'self'", 'https://unpkg.com'],
+//       // Add other directives as needed
+//     },
+//   }),
+// );
 
 // Development Logging
 if (process.env.NODE_ENV === 'development') {
