@@ -12256,7 +12256,7 @@ var _login = require("./login");
 /* eslint-disable */
 
 // DOM elements
-var loginForm = document.querySelector('.form');
+var loginForm = document.querySelector('.form--login');
 var mapBox = document.getElementById('map');
 var logOutBtn = document.querySelector('.nav__el--logout');
 
