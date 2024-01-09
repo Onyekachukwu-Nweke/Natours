@@ -12330,6 +12330,7 @@ if (loginForm) {
     e.preventDefault();
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    // console.log(email, password)
     (0, _login.login)(email, password);
   });
 }
