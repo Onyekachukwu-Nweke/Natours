@@ -44,8 +44,8 @@ module.exports = class Email {
       from: this.from,
       to: this.to,
       subject,
-      text: htmlToText.fromString(html),
       html,
+      text: htmlToText.convert(html),
     };
 
     // 3. Create a transport and send email
@@ -53,6 +53,6 @@ module.exports = class Email {
   }
 
   async sendWelcome() {
-    await this.send('Welcome', 'Welcome to the Natours Family!');
+    await this.send('welcome', 'Welcome to the Natours Family!');
   }
 };
