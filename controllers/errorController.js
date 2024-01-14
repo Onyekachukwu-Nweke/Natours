@@ -1,3 +1,5 @@
+/* eslint-disable no-lonely-if */
+/* eslint-disable no-else-return */
 const AppError = require('../utils/appError');
 
 const handleCastErrorDB = (err) => {
@@ -8,7 +10,7 @@ const handleCastErrorDB = (err) => {
 
 const handleDuplicateFieldsDB = (err) => {
   const value = err.errmsg.match(/(["'])(\\?.)*?/)[0];
-  console.log(value);
+  // console.log(value);
   const message = `Duplicate field value: ${value}. Please use another value!`;
 
   return new AppError(message, 400);
@@ -37,7 +39,7 @@ const sendErrorDev = (err, req, res) => {
     res.status(err.statusCode).render('error', {
       title: 'Something went wrong!',
       msg: err.message,
-    })
+    });
   }
 };
 
@@ -73,7 +75,7 @@ const sendErrorProd = (err, req, res) => {
       res.status(err.statusCode).render('error', {
         title: 'Something went wrong!',
         msg: err.message,
-      })
+      });
 
       // Programming or other unknwon error: don't leak error mesaages
     } else {
